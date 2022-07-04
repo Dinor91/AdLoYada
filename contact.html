@@ -12,6 +12,40 @@
     ></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
+    <script>
+      function validateForm() {
+        let x = document.forms["askQ"]["name"].value;
+        if (x == "") {
+          alert("עליך למלא שם פרטי ומשפחה! ");
+          return false;
+
+        }
+      }
+
+      function ValidateEmail(input) {
+        var validRegex =
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        if (input.value.match(validRegex)) {
+          alert("כתובת מייל תקינה!");
+
+          document.askQ.Email.focus();
+
+          return true;
+        } else {
+          alert("כתובת מייל לא תקינה!");
+
+          document.askQ.Email.focus();
+
+          return false;
+        }
+      }
+
+     
+    </script>
+
+
   </head>
   <body>
       <div class="d-flex flex-column min-vh-100">
@@ -67,17 +101,20 @@
          
         
           <fieldset>
-            <legend>כמה פרטים ואנחנו חוזרים אליכם עם תשובה</legend>
-            <form action="https://formspree.io/f/xjvllvpq" method="post">
+            <legend> טופס יצירת קשר</legend>
+            <form name="askQ" action="https://formspree.io/f/xjvllvpq" method="post" onsubmit="return validateForm()">
+
+               <input type="text" name="Email" placeholder="exampel@gmail.com" /><br><br>
               <input type="text" name="name" placeholder="שם פרטי ומשפחה" />
-              <br><br>
-              <input type="text" name="Email" placeholder="exampel@gmail.com" />
+              
+              <div></div>
+             
         <hr />
       
          
             <legend>מתכוון להגיע לעדלאידע?</legend>
             
-              כן <input type="radio" name="gender" value="כן" checked /> <br />
+              כן  <input type="radio" name="gender" value="כן" checked /> <br />
               לא <input type="radio" name="gender" value="לא" />
            
           
@@ -103,7 +140,7 @@
         
     
           
-            <legend>מוזמנים לשאול כל אשר עולה בדעתכם</legend>
+            
             <div class="form-floating">
               <textarea class="form-control" placeholder="אני רוצה לדעת האם..." id="floatingTextarea" style="height: 200px"></textarea>
               <label for="floatingTextarea" >מה הייתם מעוניינים לדעת?</label>
@@ -113,7 +150,7 @@
         <hr />
         
           
-            <legend>אזור בארץ</legend>
+            <legend> מהיכן תגיעו אלינו?</legend>
             
               <select name="מחוזות">
                 <option value="צפון">צפון</option>
@@ -125,7 +162,10 @@
     
               
               <hr /> 
-              <div class="text-center"><button class="formbut">שלח</button></div>
+              <div class="text-center"><button class="formbut"          type="submit"
+                name="validate"
+                value="Validate"
+                onclick="ValidateEmail(document.askQ.Email)">שלח</button></div>
               
             </form>
           </fieldset>
